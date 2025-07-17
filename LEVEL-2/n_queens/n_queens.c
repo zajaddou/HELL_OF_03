@@ -3,22 +3,23 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int *board;
-int board_size;
+char    *map;
+int     size;
 
 int ft_abs(int n)
 {
     if (n < 0)
         return (-n);
-    return n;
+    return (n);
 }
 
-void print_solution(void)
+void print_map(void)
 {
-    for (int i = 0; i < board_size; i++)
+    int i = -1;
+    while (++i < size)
     {
-        fprintf(stdout, "%d", board[i]);
-        if (i < board_size - 1)
+        fprintf(stdout, "%d", map[i]);
+        if (i < size - 1)
             fprintf(stdout, " ");
     }
     fprintf(stdout, "\n");
@@ -26,28 +27,30 @@ void print_solution(void)
 
 int is_safe(int row, int col)
 {
-    for (int i = 0; i < col; i++)
+    int i = -1;
+    while (++i < col)
     {
-        if (board[i] == row)
-            return 0;
-        if (ft_abs(board[i] - row) == ft_abs(i - col))
-            return 0;
+        if (map[i] == row)
+            return (0);
+        if (ft_abs(map[i] - row) == ft_abs(i - col))
+            return (0);
     }
-    return 1;
+    return (1);
 }
 
 void solve(int col)
 {
-    if (col == board_size)
+    if (col == size)
     {
-        print_solution();
+        print_map();
         return ;
     }
-    for (int row = 0; row < board_size; row++)
+    int row = -1;
+    while (++row < size)
     {
         if (is_safe(row, col))
         {
-            board[col] = row;
+            map[col] = row;
             solve(col + 1);
         }
     }
@@ -57,14 +60,13 @@ int main(int ac, char **av)
 {
     if (ac != 2)
         return (write(1, "\n", 1), 0);
-    int n = atoi(av[1]);
-    if (n <= 3)
+    size = atoi(av[1]);
+    if (size <= 3)
         return (write(1, "\n", 1), 0);
-    board_size = n;
-    board = malloc(sizeof(int) * board_size);
-    if (!board)
-        return 1;
+    map = malloc(sizeof(int) * size);
+    if (!map)
+        return (1);
     solve(0);
-    free(board);
+    free(map);
     return (0);
 }
