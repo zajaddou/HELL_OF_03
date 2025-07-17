@@ -66,5 +66,5 @@ int main(int ac, char **av)
         return 1;
     solve(0);
     free(board);
-    return 0;
+    return (0);
 }
