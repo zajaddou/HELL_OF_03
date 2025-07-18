@@ -1,19 +1,12 @@
 
+#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
-char    *map;
 int     size;
+char    *map;
 
-int ft_abs(int n)
-{
-    if (n < 0)
-        return (-n);
-    return (n);
-}
-
-void print_map(void)
+void    print_map(void)
 {
     int i = -1;
     while (++i < size)
@@ -25,38 +18,26 @@ void print_map(void)
     fprintf(stdout, "\n");
 }
 
-int is_safe(int row, int col)
-{
-    int i = -1;
-    while (++i < col)
-    {
-        if (map[i] == row)
-            return (0);
-        if (ft_abs(map[i] - row) == ft_abs(i - col))
-            return (0);
-    }
-    return (1);
-}
-
-void solve(int col)
+void    algo(int col)
 {
     if (col == size)
-    {
-        print_map();
-        return ;
-    }
+        return (print_map());
     int row = -1;
     while (++row < size)
     {
-        if (is_safe(row, col))
+        int i = -1;
+        while (++i < col)
+            if ((abs(i - col) == abs(map[i] - row)) || (map[i] == row))
+                break;
+        if (i == col)
         {
             map[col] = row;
-            solve(col + 1);
+            algo(col + 1);
         }
     }
 }
 
-int main(int ac, char **av)
+int     main(int ac, char *av[])
 {
     if (ac != 2)
         return (write(1, "\n", 1), 0);
@@ -64,9 +45,7 @@ int main(int ac, char **av)
     if (size <= 3)
         return (write(1, "\n", 1), 0);
     map = malloc(sizeof(int) * size);
-    if (!map)
-        return (1);
-    solve(0);
+    algo(0);
     free(map);
     return (0);
 }
