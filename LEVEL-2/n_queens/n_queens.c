@@ -1,4 +1,3 @@
-
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,7 +5,7 @@
 int     size;
 char    *map;
 
-void    print_map(void)
+void print_map(void)
 {
     int i = -1;
     while (++i < size)
@@ -18,7 +17,7 @@ void    print_map(void)
     fprintf(stdout, "\n");
 }
 
-void    algo(int col)
+void algo(int col)
 {
     if (col == size)
         return (print_map());
@@ -27,9 +26,9 @@ void    algo(int col)
     {
         int i = -1;
         while (++i < col)
-            if ((abs(i - col) == abs(map[i] - row)) || (map[i] == row))
+            if ((map[i] == row) || (abs(map[i] - row) == abs(i - col)))
                 break;
-        if (i == col)
+        if (col == i)
         {
             map[col] = row;
             algo(col + 1);
@@ -37,15 +36,17 @@ void    algo(int col)
     }
 }
 
-int     main(int ac, char *av[])
+int main(int ac, char *av[])
 {
     if (ac != 2)
         return (write(1, "\n", 1), 0);
     size = atoi(av[1]);
-    if (size <= 3)
+    if (size > 1 && size < 4)
         return (write(1, "\n", 1), 0);
     map = malloc(sizeof(int) * size);
-    algo(0);
+    if (!map)
+        return (1);
+    algo(0);;
     free(map);
     return (0);
 }
