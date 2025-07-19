@@ -1,15 +1,15 @@
 
 #include <unistd.h>
 #include <stdio.h>
-#include <strings.h>
 #include <stdlib.h>
+#include <string.h>
 
 char    *s;
-char    *res;
 int     len;
+char    *res;
 int     *used;
 
-void    permute(int dep)
+void permutation(int dep)
 {
     if (dep == len)
     {
@@ -17,32 +17,30 @@ void    permute(int dep)
         write(1, "\n", 1);
         return ;
     }
-    int i = 0;
-    while (i < len)
+    int i = -1;
+    while (++i < len)
     {
         if (!used[i])
         {
-            used[i] = 1;
+            used[i] = !used[i];
             res[dep] = s[i];
-            permute(dep + 1);
-            used[i] = 0;
+            permutation(dep + 1);
+            used[i] = !used[i];
         }
-        i++;
     }
 }
 
-int    main(int ac, char **av)
+int main(int ac, char *av[])
 {
     if (ac != 2)
-        return (write (1, "\n", 1), 0);
+        return (write(1, "\n", 1), 0);
     s = av[1];
-    // sort(s);
     len = strlen(s);
     res = malloc(len + 1);
     used = calloc(len, sizeof(int));
-    if (!res || !used)
+    if (!used || !res)
         return (1);
-    permute(0);
+    permutation(0);
     free(res);
     free(used);
     return (0);
