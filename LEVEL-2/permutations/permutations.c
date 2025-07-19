@@ -4,7 +4,8 @@
 #include <strings.h>
 #include <stdlib.h>
 
-char    *s, *res;
+char    *s;
+char    *res;
 int     len;
 int     *used;
 
