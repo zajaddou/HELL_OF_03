@@ -46,7 +46,7 @@ int main(int ac, char *av[])
     map = malloc(sizeof(int) * size);
     if (!map)
         return (1);
-    algo(0);;
+    algo(0);
     free(map);
     return (0);
 }
