@@ -4,9 +4,10 @@
 #include <strings.h>
 #include <stdlib.h>
 
-char    *s, *res;
+char    *s;
 int     len;
 int     *used;
+char    *res;
 
 void    permute(int dep)
 {
