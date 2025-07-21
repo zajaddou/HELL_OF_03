@@ -6,7 +6,7 @@ This is training repository for new 42network ( EXAM 03 )
 
 ```
 ├── LEVEL-1/
-│   ├── broken_gnl
+│   ├── get_next_line
 │   ├── filter
 │   └── scanf
 └── LEVEL-2/
