@@ -23,7 +23,7 @@ char    *ft_strdup(char *src)
 
 char    *get_next_line(int fd)
 {
-    static char buff[700000];
+    static char buff[BUFFER_SIZE];
     char        line[70000];
     static int  r;
     static int  p;
