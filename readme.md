@@ -1,7 +1,6 @@
 # 42 Exam Rank 03
 
-Training repository for new 42network ( EXAM 03 )
-Don't Use it the solution are wrong
+Training repository for new 42network ( EXAM 03 ) -> Don't Use it the solution are wrong
 
 ## Structure
 
